@@ -1,0 +1,23 @@
+.eyeOutline {
+    margin-Right: 12px;
+    color: blue !important
+}
+
+.deleteOutlined-css {
+    margin-Right: 12px;
+    color: red !important
+}
+
+.editOutlined-css {
+    margin-Right: 12px;
+    color: blue
+}
+.ant-btn-primary {
+    color: #fff;
+    border-color: #1890ff;
+    background: #1890ff;
+    text-shadow: 0 -1px 0rgba(0,0,0,.12);
+    box-shadow: 0 2px 0rgba(0,0,0,.045);
+    margin-bottom: 9px;
+    
+}
