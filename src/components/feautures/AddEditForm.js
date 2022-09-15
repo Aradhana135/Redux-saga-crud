@@ -1,12 +1,11 @@
 import React from "react";
 import { Button, Input, Form, InputNumber } from "antd";
-import '../../.././components/styles.css'
+import "../styles.css";
 function AddEditForm(props) {
   return (
-    <div >
-    
-      
-      <Form className="add-edit-form-css"
+    <div>
+      <Form
+        className="add-edit-form-css"
         name="basic"
         labelCol={{
           span: 8,
@@ -17,9 +16,9 @@ function AddEditForm(props) {
         onFinish={props.onFinish}
         autoComplete="off"
         initialValues={{
-          name: props.formFor === "add" ? "" : props.dataSource.name,
-          email: props.formFor === "add" ? "" : props.dataSource.email,
-          phone: props.formFor === "add" ? "" : props.dataSource.phone,
+          name: props.formFor === "add" ? "" :props.users.name,
+          email: props.formFor === "add" ? "" : props.users.email,
+          phone: props.formFor === "add" ? "" : props.users.phone,
         }}
       >
         <Form.Item
@@ -53,8 +52,8 @@ function AddEditForm(props) {
           <Input Input allowClear className="input-css" placeholder="Email" />
         </Form.Item>
         <Form.Item
-          label="Number"
-          name="number"
+          label="number"
+          name="phone"
           rules={[
             {
               required: true,
@@ -62,7 +61,13 @@ function AddEditForm(props) {
             },
           ]}
         >
-          <Input  Input allowClear className="input-css" placeholder="Phone Number"  />
+          <Input
+            // type="number"
+            Input
+            allowClear
+            className="input-css"
+            placeholder="Phone Number"
+          />
         </Form.Item>
 
         <Form.Item
@@ -80,7 +85,6 @@ function AddEditForm(props) {
         </Form.Item>
       </Form>
     </div>
-      
   );
 }
 

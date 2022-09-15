@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import AddDetails from "../../src/components/feautures/AddDetails";
+import EditDetails from "../../src/components/feautures/EditDetails";
+import Users from "../components/feautures/Users";
+import ViewDetails from "./feautures/ViewDetails";
 
-import { Route } from 'react-router-dom';
+import { Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
+import {
+  actionCreators as usersActions,
+  selector as usersSelector,
+} from "../redux/index";
+import { useSelector, useDispatch } from "react-redux";
 
-import Layout from './Layout';
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(usersActions.list());
+  }, [dispatch]);
 
-const App = ({ component: Component, rest }) => {
   return (
-    <Route
-      {...rest}
-      render={(routeProps) => (
-        <Layout>
-          <Component {...routeProps} />
-        </Layout>
-      )}
-    />
+    <Switch>
+      <Route path={"/add"} component={AddDetails} />
+      <Route path={"/view/:id"} component={ViewDetails} />
+      <Route path={"/edit/:id"} component={EditDetails} />
+      <Route path={"/"} component={Users} />
+    </Switch>
   );
 };
 
