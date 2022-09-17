@@ -5,12 +5,18 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddEditForm from "./AddEditForm";
-
-const EditDetails = (props) => {
-  const [users, setUsers] = useState([]);
+import { Card } from "antd";
+import {
+  actionCreators as usersActions,
+  selector as usersSelector,
+} from "../../redux/index";
+const EditDetails = () => {
+  const [users, setUsers] = useState({});
   const params = useParams();
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${params.id}`)
+    fetch(`http://localhost:3000/users/${params.id}`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((er) => console.log(er));
@@ -18,23 +24,24 @@ const EditDetails = (props) => {
   console.log("users", users);
   const history = useHistory();
 
-  console.log("hh");
-  console.log(props.data);
   const onFinish = (values) => {
-    history.push("/users");
+    dispatch(usersActions.edit({ ...values, id: params.id }));
+    history.push("/");
   };
   const handleCancel = () => {
-    history.push("/users");
+    history.push("/");
   };
 
   return (
     <>
-      <AddEditForm
-        onFinish={onFinish}
-        cancel={handleCancel}
-        users={users}
-        formFor="edit"
-      />
+      <Card>
+        <AddEditForm
+          onFinish={onFinish}
+          cancel={handleCancel}
+          users={users}
+          formFor="edit"
+        />
+      </Card>
     </>
   );
 };

@@ -21,8 +21,8 @@ const App = () => {
   return (
     <Switch>
       <Route path={"/add"} component={AddDetails} />
-      <Route path={"/view/:id"} component={ViewDetails} />
-      <Route path={"/edit/:id"} component={EditDetails} />
+      <Route path={"/viewuser/:id"} component={ViewDetails} />
+      <Route path={"/edituser/:id"} component={EditDetails} />
       <Route path={"/"} component={Users} />
     </Switch>
   );

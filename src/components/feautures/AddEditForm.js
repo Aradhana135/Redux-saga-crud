@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Form, InputNumber } from "antd";
 import "../styles.css";
 function AddEditForm(props) {
@@ -16,12 +16,13 @@ function AddEditForm(props) {
         onFinish={props.onFinish}
         autoComplete="off"
         initialValues={{
-          name: props.formFor === "add" ? "" :props.users.name,
+          name: props.formFor === "add" ? "" : props.users.name,
           email: props.formFor === "add" ? "" : props.users.email,
           phone: props.formFor === "add" ? "" : props.users.phone,
         }}
       >
         <Form.Item
+          className="form-item-cls"
           label="Name"
           name="name"
           rules={[
@@ -35,6 +36,7 @@ function AddEditForm(props) {
         </Form.Item>
 
         <Form.Item
+          className="form-item-cls"
           label="Email"
           type="email"
           name="email"
@@ -52,7 +54,8 @@ function AddEditForm(props) {
           <Input Input allowClear className="input-css" placeholder="Email" />
         </Form.Item>
         <Form.Item
-          label="number"
+          className="form-item-cls"
+          label="Number"
           name="phone"
           rules={[
             {
@@ -69,20 +72,21 @@ function AddEditForm(props) {
             placeholder="Phone Number"
           />
         </Form.Item>
-
+<div className="form-submit-btn">
         <Form.Item
           wrapperCol={{
-            offset: 11,
-            span: 20,
+            offset: 10,
+            span: 30,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary"  htmlType="submit">
             Submit
           </Button>
-          <Button type="primary" onClick={props.cancel} className="Button-css">
+          <Button type="primary" onClick={props.cancel} >
             Cancel
           </Button>
         </Form.Item>
+        </div>
       </Form>
     </div>
   );
