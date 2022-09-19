@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import "../../components/styles.css";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
 import AddEditForm from "./AddEditForm";
-import { Card } from "antd";
+import { Card ,message} from "antd";
 import {
   actionCreators as usersActions,
-  selector as usersSelector,
-} from "../../redux/index";
+} from "../../redux/users/actions";
 const EditDetails = () => {
   const [users, setUsers] = useState({});
   const params = useParams();
@@ -20,13 +19,23 @@ const EditDetails = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((er) => console.log(er));
-  }, []);
+  });
   console.log("users", users);
   const history = useHistory();
 
   const onFinish = (values) => {
     dispatch(usersActions.edit({ ...values, id: params.id }));
-    history.push("/");
+    setTimeout(() => {
+      dispatch(usersActions.list());
+      history.push("/");
+     }, 1000);
+    // setTimeout(() => {
+    //   history.push("/");
+    //  }, 2000);
+     dispatch(usersActions.list());
+      console.log("params", params.id)
+
+message.success('Data edited successfully');
   };
   const handleCancel = () => {
     history.push("/");
@@ -40,7 +49,7 @@ const EditDetails = () => {
           cancel={handleCancel}
           users={users}
           formFor="edit"
-        />
+        /> 
       </Card>
     </>
   );

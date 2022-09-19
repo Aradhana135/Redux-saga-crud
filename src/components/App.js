@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import AddDetails from "../../src/components/feautures/AddDetails";
 import EditDetails from "../../src/components/feautures/EditDetails";
 import Users from "../components/feautures/Users";
@@ -8,9 +8,8 @@ import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import {
   actionCreators as usersActions,
-  selector as usersSelector,
-} from "../redux/index";
-import { useSelector, useDispatch } from "react-redux";
+} from "../redux/users/actions";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();

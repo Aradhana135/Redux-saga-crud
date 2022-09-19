@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Button, Input, Form, InputNumber } from "antd";
+import React from "react";
+import { Button, Input, Form} from "antd";
 import "../styles.css";
 function AddEditForm(props) {
   return (
-    <div>
+    props.formFor === "add" || props.users.name != null ? <div>
       <Form
         className="add-edit-form-css"
         name="basic"
@@ -64,31 +64,30 @@ function AddEditForm(props) {
             },
           ]}
         >
-          <Input
-            // type="number"
+          <Input 
             Input
             allowClear
             className="input-css"
             placeholder="Phone Number"
           />
         </Form.Item>
-<div className="form-submit-btn">
-        <Form.Item
-          wrapperCol={{
-            offset: 10,
-            span: 30,
-          }}
-        >
-          <Button type="primary"  htmlType="submit">
-            Submit
-          </Button>
-          <Button type="primary" onClick={props.cancel} >
-            Cancel
-          </Button>
-        </Form.Item>
+        <div className="form-submit-btn">
+          <Form.Item
+            wrapperCol={{
+              offset: 10,
+              span: 30,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            <Button type="primary" onClick={props.cancel} >
+              Cancel
+            </Button>
+          </Form.Item>
         </div>
       </Form>
-    </div>
+    </div> : null
   );
 }
 

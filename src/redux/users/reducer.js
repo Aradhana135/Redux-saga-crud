@@ -20,15 +20,15 @@ export default function reducer(state = initialState, action = {}) {
         isLoading: false,
         // dataList: [...state.dataList, action.data],
       };
-    case actionTypes.EDIT_USER:
+    case actionTypes.EDIT_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        dataList: state.dataList.map((product) =>
-          product.id == action.data.id ? action.data : product
+        dataList: state.dataList.map((item) =>
+          item.id === action.data.id ? action.data : item
         ),
       };
-    case actionTypes.DELETE_USER:
+    case actionTypes.DELETE_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,

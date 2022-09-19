@@ -5,39 +5,25 @@ import { useHistory } from "react-router-dom";
 import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import "antd/dist/antd.min.css";
 import "../../components/styles.css";
-import { Alert } from "antd";
+import { message } from "antd";
 
 import {
   actionCreators as usersActions,
   selector as usersSelector,
-} from "../../redux/index";
+} from "../../redux/users/actions";
 
 const Users = () => {
-  //   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const history = useHistory();
   const { users } = useSelector((state) => usersSelector(state));
   console.log("users", users);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(usersActions.list());
-  }, []);
-  //   const [user, setUser] = useState({});
+    if (isDelete || !users) {
+      dispatch(usersActions.list());
+    }
+  }, [dispatch, isDelete, users]);
 
-  //   const showModal = (record) => {
-  //     setIsModalOpen(true);
-  //     setUser(record);
-  //   };
-
-  //   const handleOk = () => {
-  //     setIsModalOpen(false);
-  //   };
-
-  //   const handleCancel = () => {
-  //     setIsModalOpen(false);
-  //   };
-  //columns
   const columns = [
     {
       title: "Name",
@@ -77,13 +63,13 @@ const Users = () => {
               className="editOutlined-css"
               onClick={(e) => {
                 history.push(`/edituser/${record.id}`);
-                // history.push('/edit');
               }}
             />
 
             <DeleteOutlined
               onClick={() => {
                 onDeleteStudent(record);
+                
               }}
               className="deleteOutlined-css"
             />
@@ -103,6 +89,7 @@ const Users = () => {
         setTimeout(() => {
           setIsDelete(false);
         }, 1000);
+        message.success('Data deleted successfully');
       },
     });
   };
@@ -116,10 +103,12 @@ const Users = () => {
       >
         Add user
       </Button>
-      <div className="main-div-css">
+      <div 
+      className="main-div-css"
+      >
         <h1 className="heading-cls">User Details </h1>
-        <div className="table-div-css"></div>
-        <Table
+        <div className="table-div-css">
+        <Table 
           columns={columns}
           dataSource={users.dataList}
           loading={users.isLoading}
@@ -130,18 +119,10 @@ const Users = () => {
             pageSizeOptions: ["10", "20", "30"],
           }}
         />
+        </div>
+       
       </div>
-      {/* <Modal
-        title="Basic Modal"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>Name: {user.name}</p>
-        <p>Email: {user.email} </p>
-        <p>Phone: {user.phone}</p>
-      </Modal> */}
-      ;{isDelete && <Alert message="Data deleted Successfully" showIcon />}
+     
     </>
   );
 };
